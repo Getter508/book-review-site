@@ -11,6 +11,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'foundation-rails'
+gem 'devise'
 
 group :development, :test do
   gem 'pry-rails'
