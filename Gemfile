@@ -16,6 +16,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'factory_bot_rails'
   gem 'launchy'
   gem 'factory_bot'
   gem 'valid_attribute'
