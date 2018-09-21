@@ -21,4 +21,4 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+[ ![Codeship Status for Getter508/book-review-site](https://app.codeship.com/projects/98b46750-9f1b-0136-3d68-72e1962a4c81/status?branch=master)](https://app.codeship.com/projects/306377)
