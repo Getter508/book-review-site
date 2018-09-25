@@ -1,0 +1,44 @@
+<div class="book_form">
+  <%= form_for(@book) do |f| %>
+    <% if @book.errors.any? %>
+      <div class="error_explanation">
+        <h3><%= pluralize(@book.errors.count, "error") %> prohibited this submission:</h3>
+
+        <ul>
+        <% @book.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :title %><br />
+      <%= f.text_field :title, value: @book.title %>
+    </div>
+
+    <div class="field">
+      <%= f.label :author %><br />
+      <%= f.text_field :author, value: @book.author %>
+    </div>
+
+    <div class="field">
+      <%= f.label :publication_year %><br />
+      <%= f.text_field :publication_year, value: @book.year %>
+    </div>
+
+    <div class="field">
+      <%= f.label :genre %><br />
+      <%= f.select(:genre, Book::GENRES, { prompt: 'Select an option'}) %>
+    </div>
+
+    <div class="field">
+      <%= f.label :synopsis %><br />
+      <%= f.text_area :synopsis, value: @book.synopsis, size: "60x12" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Submit" %>
+    </div>
+  <% end %>
+</div>
