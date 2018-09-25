@@ -17,7 +17,7 @@ class Book < ApplicationRecord
   validates_presence_of :title, :author, :user_id
   validates :user_id, numericality: { only_integer: true }
   validates :genre, inclusion: { in: GENRES }
-  validates :synopsis, length: { maximum: 500 }
+  validates :synopsis, length: { maximum: 1000 }
   validates :year, length: { is: 4 }, numericality: { only_integer: true },
     allow_nil: true
   validates_with YearValidator

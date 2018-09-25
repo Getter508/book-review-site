@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  
+
   def index
     @books = Book.all
   end
@@ -15,7 +15,7 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-    @book.user_id = current_user.id if current_user.present?
+    @book.user_id = current_user.id
 
     if @book.save
       redirect_to @book, notice: 'Book was submitted successfully'
