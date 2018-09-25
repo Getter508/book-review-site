@@ -1,0 +1,11 @@
+<h2>All Books</h2>
+
+<% if user_signed_in? %>
+  <p><%= link_to 'Submit a Book', new_book_path %></p>
+<% end %>
+
+<ul>
+  <%= @books.each do |book| %>
+    <li><%= link_to book.title, book_path(book) %></li>
+  <% end %>
+</ul>
