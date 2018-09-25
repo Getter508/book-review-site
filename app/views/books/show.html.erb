@@ -6,3 +6,10 @@
 <h4>Publication Year: <%= @book.year %></h4>
 <h4>Genre: <%= @book.genre %></h4>
 <h4>Synopsis: <%= @book.synopsis %></h4>
+
+<ul>
+  <% if user_signed_in? && current_user.id == @book.user_id %>
+    <li><%= link_to 'Edit', edit_book_path(@book) %></li>
+    <li><%= link_to 'Delete', book_path(@book), method: :delete %></li>
+  <% end %>
+</ul>

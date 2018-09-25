@@ -12,7 +12,7 @@ class Book < ApplicationRecord
   GENRES = ["Drama", "Mystery", "Romance", "Fantasy", "SciFi", "Non-Fiction"]
 
   belongs_to :user
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   validates_presence_of :title, :author, :user_id
   validates :user_id, numericality: { only_integer: true }

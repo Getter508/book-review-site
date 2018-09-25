@@ -1,7 +1,7 @@
 class Review < ApplicationRecord
   belongs_to :user
   belongs_to :book
-  has_many :ratings
+  has_many :ratings, dependent: :destroy
 
   validates_presence_of :title, :body, :user_id, :book_id
   validates :title, length: { maximum: 50 }

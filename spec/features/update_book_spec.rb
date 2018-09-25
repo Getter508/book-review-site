@@ -12,7 +12,10 @@ require 'rails_helper'
 
 feature 'user tries to update a book' do
   scenario 'user is not signed in' do
+    book = FactoryBot.create(:book)
+
     visit books_path
+    click_on 'The Name of the Wind'
 
     expect(page).not_to have_content('Edit')
   end
@@ -29,6 +32,7 @@ feature 'user tries to update a book' do
     click_button 'Log in'
 
     visit books_path
+    click_on 'The Name of the Wind'
 
     expect(page).not_to have_content('Edit')
   end
@@ -44,6 +48,7 @@ feature 'user tries to update a book' do
     click_button 'Log in'
 
     visit books_path
+    click_on 'The Name of the Wind'
     click_on 'Edit'
 
     expect(page).to have_content('Use the form below to update this book')
@@ -65,6 +70,7 @@ feature 'user tries to update a book' do
     click_button 'Log in'
 
     visit books_path
+    click_on 'The Name of the Wind'
     click_on 'Edit'
 
     select 'Drama', from: 'Genre'
@@ -88,6 +94,7 @@ feature 'user tries to update a book' do
     click_button 'Log in'
 
     visit books_path
+    click_on 'The Name of the Wind'
     click_on 'Edit'
 
     fill_in 'Title', with: ''
