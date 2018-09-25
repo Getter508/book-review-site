@@ -24,6 +24,21 @@ class BooksController < ApplicationController
     end
   end
 
+  def edit
+    @book = Book.find(params[:id])
+  end
+
+  def update
+    @book = Book.find(params[:id])
+    @book.update_attributes(book_params)
+
+    if @book.save
+      redirect_to @book, notice: 'This book was successfully updated'
+    else
+      render 'edit'
+    end
+  end
+
   private
 
   def book_params
