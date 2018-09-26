@@ -8,5 +8,8 @@ Rails.application.routes.draw do
   end
 
   root to: 'books#index'
-  resources :books
+
+  resources :books do
+    resources :reviews, only: [:create]
+  end
 end

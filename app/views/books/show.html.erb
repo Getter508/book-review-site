@@ -13,3 +13,55 @@
     <li><%= link_to 'Delete', book_path(@book), method: :delete %></li>
   <% end %>
 </ul>
+
+<% if user_signed_in? %>
+  <div class="post_review">
+    <h2>Post a Review</h2>
+    <p>Use the form below to submit a review of this book.</p>
+
+    <div class="review_form">
+      <%= form_for [@book, @review] do |f| %>
+        <% if @review.errors.any? %>
+          <div class="error_explanation">
+            <h3><%= pluralize(@review.errors.count, "error") %> prohibited this submission:</h3>
+
+            <ul>
+            <% @review.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field">
+          <%= f.label :title %><br />
+          <%= f.text_field :title, value: @review.title %>
+        </div>
+
+        <div class="field">
+          <%= f.label :body %><br />
+          <%= f.text_area :body, value: @review.body %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Submit" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+
+<div class="reviews">
+  <h2>Reviews</h2>
+  <ul>
+    <% @reviews.each do |review| %>
+      <div class="review">
+        <li>
+          <h5><%= review.title %></h5>
+          <p><%= review.body %></p>
+        </li>
+      </div>
+    <% end %>
+  </ul>
+</div>
