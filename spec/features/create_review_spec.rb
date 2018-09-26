@@ -23,13 +23,11 @@ feature 'user tries to add a review' do
   end
 
   scenario 'authenticated user navigates to review form' do
-    user = FactoryBot.create(:user)
-    book = FactoryBot.create(:book, user: user)
+    book = FactoryBot.create(:book)
 
     visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
+    fill_in 'Email', with: book.user.email
+    fill_in 'Password', with: book.user.password
     click_button 'Log in'
 
     visit books_path
@@ -39,13 +37,11 @@ feature 'user tries to add a review' do
   end
 
   scenario 'provides valid information' do
-    user = FactoryBot.create(:user)
-    book = FactoryBot.create(:book, user: user)
+    book = FactoryBot.create(:book)
 
     visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
+    fill_in 'Email', with: book.user.email
+    fill_in 'Password', with: book.user.password
     click_button 'Log in'
 
     visit books_path
@@ -64,18 +60,15 @@ feature 'user tries to add a review' do
   end
 
   scenario 'provides invalid information' do
-    user = FactoryBot.create(:user)
-    book = FactoryBot.create(:book, user: user)
+    book = FactoryBot.create(:book)
 
     visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
+    fill_in 'Email', with: book.user.email
+    fill_in 'Password', with: book.user.password
     click_button 'Log in'
 
     visit books_path
     click_on 'The Name of the Wind'
-
     fill_in 'Title', with: 'Best Book Ever!'
     click_on 'Submit'
 

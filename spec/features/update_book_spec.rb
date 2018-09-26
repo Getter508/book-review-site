@@ -21,14 +21,12 @@ feature 'user tries to update a book' do
   end
 
   scenario 'user is not book creator' do
-    user1 = FactoryBot.create(:user)
-    user2 = FactoryBot.create(:user, last_name: 'Jones', email: 'you@you.com')
-    book = FactoryBot.create(:book, user: user1)
+    user = FactoryBot.create(:user)
+    book = FactoryBot.create(:book)
 
     visit new_user_session_path
-
-    fill_in 'Email', with: user2.email
-    fill_in 'Password', with: user2.password
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
     click_button 'Log in'
 
     visit books_path
@@ -38,13 +36,11 @@ feature 'user tries to update a book' do
   end
 
   scenario 'creator navigates to edit page' do
-    user = FactoryBot.create(:user)
-    book = FactoryBot.create(:book, user: user)
+    book = FactoryBot.create(:book)
 
     visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
+    fill_in 'Email', with: book.user.email
+    fill_in 'Password', with: book.user.password
     click_button 'Log in'
 
     visit books_path
@@ -60,13 +56,11 @@ feature 'user tries to update a book' do
   end
 
   scenario 'creator provides valid information' do
-    user = FactoryBot.create(:user)
-    book = FactoryBot.create(:book, user: user)
+    book = FactoryBot.create(:book)
 
     visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
+    fill_in 'Email', with: book.user.email
+    fill_in 'Password', with: book.user.password
     click_button 'Log in'
 
     visit books_path
@@ -84,13 +78,11 @@ feature 'user tries to update a book' do
   end
 
   scenario 'creator provides invalid information' do
-    user = FactoryBot.create(:user)
-    book = FactoryBot.create(:book, user: user)
+    book = FactoryBot.create(:book)
 
     visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
+    fill_in 'Email', with: book.user.email
+    fill_in 'Password', with: book.user.password
     click_button 'Log in'
 
     visit books_path
