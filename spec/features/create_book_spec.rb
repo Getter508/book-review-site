@@ -15,18 +15,14 @@ feature 'user tries to create a book' do
     user = FactoryBot.create(:user)
 
     visit new_user_session_path
-
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
-
     click_button 'Log in'
 
     visit new_book_path
-
     fill_in 'Title', with: 'The Name of the Wind'
     fill_in 'Author', with: 'Patrick Rothfuss'
     select 'Fantasy', from: 'Genre'
-
     click_button 'Submit'
 
     expect(page).to have_content('Book was submitted successfully')
@@ -38,17 +34,13 @@ feature 'user tries to create a book' do
     user = FactoryBot.create(:user)
 
     visit new_user_session_path
-
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
-
     click_button 'Log in'
 
     visit new_book_path
-
     fill_in 'Title', with: 'The Name of the Wind'
     select 'Fantasy', from: 'Genre'
-
     click_button 'Submit'
 
     expect(page).to have_content("can't be blank")
