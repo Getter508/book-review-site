@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :books
   has_many :reviews
-  has_many :ratings
+  has_many :votes
 
   validates_presence_of :first_name, :last_name
 end
