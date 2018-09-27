@@ -32,6 +32,13 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    book = Book.find(params[:book_id])
+    review = Review.find(params[:id])
+    review.destroy
+    redirect_to book_path(book), notice: 'Your review was successfully deleted'
+  end
+
   private
 
   def review_params
