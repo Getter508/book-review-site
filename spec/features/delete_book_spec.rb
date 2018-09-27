@@ -20,7 +20,7 @@ feature 'user tries to delete a book' do
   end
 
   scenario 'user did not create the book' do
-    user = FactoryBot.create(:user)
+    user = FactoryBot.create(:user, admin: false)
     book = FactoryBot.create(:book)
 
     visit new_user_session_path

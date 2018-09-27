@@ -21,7 +21,7 @@ feature 'user tries to update a review' do
   end
 
   scenario 'not the author of the review' do
-    user = FactoryBot.create(:user)
+    user = FactoryBot.create(:user, admin: false)
     book = FactoryBot.create(:book)
 
     visit new_user_session_path
