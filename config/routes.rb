@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   root to: 'books#index'
 
   resources :books do
-    resources :reviews, only: [:create, :edit, :update]
+    resources :reviews, only: [:create, :edit, :update, :destroy]
   end
 end
