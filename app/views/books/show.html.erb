@@ -9,9 +9,11 @@
   <h4>Synopsis: <%= @book.synopsis %></h4>
 
   <ul>
-    <% if user_signed_in? && current_user.id == @book.user_id %>
-      <li><%= link_to 'Edit', edit_book_path(@book) %></li>
-      <li><%= link_to 'Delete', book_path(@book), method: :delete %></li>
+    <% unless !user_signed_in? %>
+      <% if current_user.id == @book.user_id || current_user.admin? %>
+        <li><%= link_to 'Edit', edit_book_path(@book) %></li>
+        <li><%= link_to 'Delete', book_path(@book), method: :delete %></li>
+      <% end %>
     <% end %>
   </ul>
 </div>
@@ -37,9 +39,11 @@
           <h4><%= review.title %></h4>
           <p><%= review.body %></p>
 
-          <% if user_signed_in? && current_user.id == review.user_id %>
-            <%= link_to 'Edit', edit_book_review_path(@book, review) %>
-            <%= link_to 'Delete', book_review_path(@book, review), method: :delete %>
+          <% unless !user_signed_in? %>
+            <% if current_user.id == @book.user_id || current_user.admin? %>
+              <%= link_to 'Edit', edit_book_review_path(@book, review) %>
+              <%= link_to 'Delete', book_review_path(@book, review), method: :delete %>
+            <% end %>
           <% end %>
         </li>
       </div>

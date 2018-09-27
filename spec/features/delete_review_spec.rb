@@ -20,7 +20,7 @@ feature 'user tries to delete a review' do
   end
 
   scenario 'not the author of the review' do
-    user = FactoryBot.create(:user)
+    user = FactoryBot.create(:user, admin: false)
     review = FactoryBot.create(:review)
 
     visit new_user_session_path
@@ -46,7 +46,10 @@ feature 'user tries to delete a review' do
 
     visit books_path
     click_on 'The Name of the Wind'
-    click_on 'Delete'
+
+    within(".reviews") do
+      click_on 'Delete'
+    end
 
     expect(page).to have_content('Your review was successfully deleted')
     expect(page).to have_content('Kvothe')

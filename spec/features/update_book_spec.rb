@@ -21,7 +21,7 @@ feature 'user tries to update a book' do
   end
 
   scenario 'user is not book creator' do
-    user = FactoryBot.create(:user)
+    user = FactoryBot.create(:user, admin: false)
     book = FactoryBot.create(:book)
 
     visit new_user_session_path

@@ -39,7 +39,7 @@ class ReviewsController < ApplicationController
     redirect_to book_path(book), notice: 'Your review was successfully deleted'
   end
 
-  private
+  protected
 
   def review_params
     params.require(:review).permit(:rating, :title, :body)
