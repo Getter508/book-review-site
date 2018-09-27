@@ -1,4 +1,4 @@
-class Rating < ApplicationRecord
+class Vote < ApplicationRecord
   belongs_to :review
   belongs_to :user
 
@@ -6,5 +6,5 @@ class Rating < ApplicationRecord
   validates :user_id, numericality: { only_integer: true }
   validates :review_id, numericality: { only_integer: true }
   validates :user_id, uniqueness: { scope: :review_id,
-    message: "Each user can rate a review only once" }
+    message: "Each user can vote on a review only once" }
 end

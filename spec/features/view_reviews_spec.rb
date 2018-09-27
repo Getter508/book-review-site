@@ -17,6 +17,7 @@ feature 'user tries to view a list of reviews' do
     visit books_path
     click_on 'The Name of the Wind'
 
+    expect(page).to have_content('10 out of 10')
     expect(page).to have_content('Patrick Rothfuss', count: 2)
     expect(page).not_to have_content("The Wise Man's Fear")
   end

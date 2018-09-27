@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :review do
+    rating {10}
     title {"Best Book Ever!"}
     body {"I could not put it down! Already halfway through the second book in \
       the series and cannot wait for the third! Patrick Rothfuss is a literary \

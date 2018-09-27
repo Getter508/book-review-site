@@ -47,16 +47,17 @@ feature 'user tries to add a review' do
     visit books_path
     click_on 'The Name of the Wind'
 
+    select 10, from: 'Rating'
     fill_in 'Title', with: 'Best Book Ever!'
     fill_in 'Body', with: "I could not put it down! Already halfway through \
       the second book in the series and cannot wait for the third! Patrick \
       Rothfuss is a literary genius."
     click_on 'Submit'
 
+    expect(page).to have_content('Your review was posted successfully')
+    expect(page).to have_content('Patrick Rothfuss', count: 2)
     expect(find_field('Title').value).to eq(nil)
     expect(find_field('Body').value).to eq('')
-    expect(page).to have_content('Patrick Rothfuss', count: 2)
-    expect(page).to have_content('Your review was posted successfully')
   end
 
   scenario 'provides invalid information' do
