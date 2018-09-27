@@ -1,59 +1,28 @@
-<h2><%= @book.title %></h2>
+<div class="book_details">
+  <h2><%= @book.title %></h2>
 
-<%= @book.image_url %>
+  <%= @book.image_url %>
 
-<h4>Author: <%= @book.author %></h4>
-<h4>Publication Year: <%= @book.year %></h4>
-<h4>Genre: <%= @book.genre %></h4>
-<h4>Synopsis: <%= @book.synopsis %></h4>
+  <h4>Author: <%= @book.author %></h4>
+  <h4>Publication Year: <%= @book.year %></h4>
+  <h4>Genre: <%= @book.genre %></h4>
+  <h4>Synopsis: <%= @book.synopsis %></h4>
 
-<ul>
-  <% if user_signed_in? && current_user.id == @book.user_id %>
-    <li><%= link_to 'Edit', edit_book_path(@book) %></li>
-    <li><%= link_to 'Delete', book_path(@book), method: :delete %></li>
-  <% end %>
-</ul>
+  <ul>
+    <% if user_signed_in? && current_user.id == @book.user_id %>
+      <li><%= link_to 'Edit', edit_book_path(@book) %></li>
+      <li><%= link_to 'Delete', book_path(@book), method: :delete %></li>
+    <% end %>
+  </ul>
+</div>
 
 <% if user_signed_in? %>
   <div class="post_review">
     <h2>Post a Review</h2>
     <p>Use the form below to submit a review of this book.</p>
 
-    <div class="review_form">
-      <%= form_for [@book, @review] do |f| %>
-        <% if @review.errors.any? %>
-          <div class="error_explanation">
-            <h3><%= pluralize(@review.errors.count, "error") %> prohibited this submission:</h3>
+    <%= render 'reviews/form' %>
 
-            <ul>
-            <% @review.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-            </ul>
-          </div>
-        <% end %>
-
-        <div class="field">
-          <%= f.label :rating %><br />
-          <%= f.select(:rating, (1..10).to_a, { prompt: 'Select a rating'}) %>
-          <p>(1 is the worst and 10 is the best)</p>
-        </div>
-
-        <div class="field">
-          <%= f.label :title %><br />
-          <%= f.text_field :title, value: @review.title %>
-        </div>
-
-        <div class="field">
-          <%= f.label :body %><br />
-          <%= f.text_area :body, value: @review.body %>
-        </div>
-
-        <div class="actions">
-          <%= f.submit "Submit" %>
-        </div>
-      <% end %>
-    </div>
   </div>
 <% end %>
 
@@ -67,6 +36,10 @@
           <h3><%= review.rating %> out of 10</h3>
           <h4><%= review.title %></h4>
           <p><%= review.body %></p>
+
+          <% if user_signed_in? && current_user.id == review.user_id %>
+            <%= link_to 'Edit', edit_book_review_path(@book, review) %>
+          <% end %>
         </li>
       </div>
     <% end %>
