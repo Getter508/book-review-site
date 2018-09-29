@@ -15,6 +15,7 @@ feature 'new user tries to sign up' do
     visit new_user_registration_path
     fill_in 'First name', with: 'Sarah'
     fill_in 'Last name', with: 'Getter'
+    fill_in 'Username', with: 'sgetter'
     fill_in 'Email', with: 'me@me.com'
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
@@ -27,7 +28,7 @@ feature 'new user tries to sign up' do
   scenario 'provide invalid registration information' do
     visit new_user_registration_path
     click_button 'Sign up'
-    
+
     expect(page).to have_content("can't be blank")
     expect(page).to_not have_content('Sign Out')
   end

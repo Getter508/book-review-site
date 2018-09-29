@@ -56,7 +56,8 @@ class BooksController < ApplicationController
       :year,
       :genre,
       :synopsis,
-      :image_url
+      :image,
+      :remove_image
     )
   end
 end

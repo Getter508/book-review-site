@@ -37,6 +37,16 @@
       <%= f.text_area :synopsis, value: @book.synopsis, size: "60x12" %>
     </div>
 
+    <div class="field">
+      <%= f.label :image %><br />
+      <%= f.file_field :image, value: @book.image %>
+      <% if f.object.image? %>
+        <%= image_tag f.object.image.thumb.url %>
+        <%= f.label :remove_image %>
+        <%= f.check_box :remove_image %>
+      <% end %>
+    </div>
+
     <div class="actions">
       <%= f.submit "Submit" %>
     </div>

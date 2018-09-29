@@ -1,7 +1,7 @@
 <div class="book_details">
   <h2><%= @book.title %></h2>
 
-  <%= @book.image_url %>
+  <%= image_tag @book.image.cover.url  if @book.image.file %>
 
   <h4>Author: <%= @book.author %></h4>
   <h4>Publication Year: <%= @book.year %></h4>
@@ -9,11 +9,9 @@
   <h4>Synopsis: <%= @book.synopsis %></h4>
 
   <ul>
-    <% unless !user_signed_in? %>
-      <% if current_user.id == @book.user_id || current_user.admin? %>
-        <li><%= link_to 'Edit', edit_book_path(@book) %></li>
-        <li><%= link_to 'Delete', book_path(@book), method: :delete %></li>
-      <% end %>
+    <% if current_user&.id == @book.user_id || current_user&.admin? %>
+      <li><%= link_to 'Edit', edit_book_path(@book) %></li>
+      <li><%= link_to 'Delete', book_path(@book), method: :delete %></li>
     <% end %>
   </ul>
 </div>
@@ -35,15 +33,16 @@
     <% @reviews.each do |review| %>
       <div class="review">
         <li>
+          <%= image_tag review.user.avatar.thumb.url if review.user.avatar.file %>
+          <p><%= review.user.username %></p>
           <h3><%= review.rating %> out of 10</h3>
           <h4><%= review.title %></h4>
           <p><%= review.body %></p>
+          <p>Posted review at <%= review.created_at %></p>
 
-          <% unless !user_signed_in? %>
-            <% if current_user.id == @book.user_id || current_user.admin? %>
-              <%= link_to 'Edit', edit_book_review_path(@book, review) %>
-              <%= link_to 'Delete', book_review_path(@book, review), method: :delete %>
-            <% end %>
+          <% if current_user&.id == @book.user_id || current_user&.admin? %>
+            <%= link_to 'Edit', edit_book_review_path(@book, review) %>
+            <%= link_to 'Delete', book_review_path(@book, review), method: :delete %>
           <% end %>
         </li>
       </div>

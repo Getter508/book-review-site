@@ -21,4 +21,15 @@ class Book < ApplicationRecord
   validates :year, length: { is: 4 }, numericality: { only_integer: true },
     allow_nil: true
   validates_with YearValidator
+  # validates_processing_of :image
+  # validates_integrity_of :image
+  validate :image_size_validation
+
+  mount_uploader :image, ImageUploader
+
+  private
+
+  def image_size_validation
+    errors[:image] << "should be less than 500KB" if image.size > 0.5.megabytes
+  end
 end
