@@ -5,8 +5,12 @@
     <% @users.each do |user| %>
       <div class="user">
         <li>
-          <%= user.avatar_url %>
+          <% if user.avatar.file %>
+            <%= image_tag user.avatar.thumb.url %>
+          <% end %>
+
           <%= user.display_name %>
+          <%= user.username %>
           <%= user.email %>
           <%= link_to 'Delete', admin_user_path(user), method: :delete %>
         </li>

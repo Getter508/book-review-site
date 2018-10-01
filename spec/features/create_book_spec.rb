@@ -23,11 +23,13 @@ feature 'user tries to create a book' do
     fill_in 'Title', with: 'The Name of the Wind'
     fill_in 'Author', with: 'Patrick Rothfuss'
     select 'Fantasy', from: 'Genre'
+    attach_file('book[image]', Rails.root.join('spec', 'support', 'NameofWindCover.jpg'))
     click_button 'Submit'
 
     expect(page).to have_content('Book was submitted successfully')
     expect(page).not_to have_content('Use this form to submit a book')
     expect(page).not_to have_content('Add Book')
+    expect(page).to have_xpath("//img[contains(@src,'NameofWindCover.jpg')]")
   end
 
   scenario 'authenticated user provides invalid information' do

@@ -14,6 +14,21 @@
   </div>
 
   <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :avatar %><br />
+    <%= f.file_field :avatar, autofocus: true %>
+    <% if f.object.avatar? %>
+      <%= image_tag f.object.avatar.thumb.url %>
+      <%= f.label :remove_avatar %>
+      <%= f.check_box :remove_avatar %>
+    <% end %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
