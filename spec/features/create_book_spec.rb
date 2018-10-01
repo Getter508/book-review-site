@@ -23,7 +23,7 @@ feature 'user tries to create a book' do
     fill_in 'Title', with: 'The Name of the Wind'
     fill_in 'Author', with: 'Patrick Rothfuss'
     select 'Fantasy', from: 'Genre'
-    attach_file('book[image]', '/Users/sarahgetter/challenges/phase_11/online-review-site/book-review-site/spec/support/NameofWindCover.jpg')
+    attach_file('book[image]', Rails.root.join('spec', 'support', 'NameofWindCover.jpg'))
     click_button 'Submit'
 
     expect(page).to have_content('Book was submitted successfully')

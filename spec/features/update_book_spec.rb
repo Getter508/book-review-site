@@ -69,7 +69,7 @@ feature 'user tries to update a book' do
 
     select 'Drama', from: 'Genre'
     fill_in 'Synopsis', with: ''
-    attach_file('book[image]', '/Users/sarahgetter/challenges/phase_11/online-review-site/book-review-site/spec/support/NameofWindCover.jpg')
+    attach_file('book[image]', Rails.root.join('spec', 'support', 'NameofWindCover.jpg'))
     click_button 'Submit'
 
     expect(page).to have_content('This book was successfully updated')
