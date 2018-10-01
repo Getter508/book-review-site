@@ -69,12 +69,22 @@ feature 'user tries to update a book' do
 
     select 'Drama', from: 'Genre'
     fill_in 'Synopsis', with: ''
+    attach_file('book[image]', '/Users/sarahgetter/challenges/phase_11/online-review-site/book-review-site/spec/support/NameofWindCover.jpg')
     click_button 'Submit'
 
     expect(page).to have_content('This book was successfully updated')
     expect(page).to have_content('Drama')
+    expect(page).to have_xpath("//img[contains(@src,'NameofWindCover.jpg')]")
     expect(page).not_to have_content('Kvothe')
     expect(page).not_to have_content('Use the form below to update this book')
+
+    # click_on 'Edit'
+    # check 'Remove image'
+    # click_button 'Submit'
+    #
+    # expect(page).to have_content('This book was successfully updated')
+    # expect(page).not_to have_xpath("//img[contains(@src,'NameofWindCover.jpg')]")
+    # expect(page).not_to have_content('Use the form below to update this book')
   end
 
   scenario 'creator provides invalid information' do

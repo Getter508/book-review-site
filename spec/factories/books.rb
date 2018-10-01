@@ -11,6 +11,7 @@ FactoryBot.define do
       know Kvothe as a notorious magician, an accomplished thief, a masterful \
       musician, and an infamous assassin. But The Name of the Wind is so much \
       more—for the story it tells reveals the truth behind Kvothe's legend."}
+    # image { Rack::Test::UploadedFile.new(Rails.root.join('spec/support/NameofWindCover.jpg'), 'image/jpeg') }
 
     user
   end
