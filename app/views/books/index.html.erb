@@ -1,5 +1,9 @@
 <h2>All Books</h2>
 
+<% if @books.blank? && params[:search] %>
+  <h4>There are no books containing "<%= params[:search] %>"</h4>
+<% end %>
+
 <% if user_signed_in? %>
   <p><%= link_to 'Submit a Book', new_book_path %></p>
 <% end %>

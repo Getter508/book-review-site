@@ -2,7 +2,12 @@ class BooksController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @books = Book.order(title: :asc)
+    @books = Book.all
+    if params[:search]
+      @books = Book.search(params[:search]).order(title: :asc)
+    else
+      @books = Book.order(title: :asc)
+    end
   end
 
   def show
