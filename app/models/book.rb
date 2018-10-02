@@ -32,4 +32,8 @@ class Book < ApplicationRecord
   def image_size_validation
     errors[:image] << "should be less than 500KB" if image.size > 0.5.megabytes
   end
+
+  def self.search(search)
+    where("title ILIKE ? OR author ILIKE ? OR synopsis ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%") 
+  end
 end

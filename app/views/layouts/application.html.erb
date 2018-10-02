@@ -24,6 +24,13 @@
           <li><%= link_to 'Sign In', new_user_session_path %></li>
         <%- end -%>
       </ul>
+
+      <nav class="search">
+        <%= form_tag(books_path, :method => "get", id: "search-form") do %>
+          <%= text_field_tag :search, params[:search], placeholder: "Search Books" %>
+          <%= submit_tag "Search", :name => nil %>
+        <% end %>
+      </nav>
     </section>
 
     <p class="notice"><%= notice %></p>
