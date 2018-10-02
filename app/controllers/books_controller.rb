@@ -4,8 +4,13 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
     if params[:search]
-      @books = Book.search(params[:search]).order(title: :asc)
+      @header = "Search Results"
+      books = Book.search(params[:search])
+      authors = Author.search(params[:search]).includes(:books)
+      books_from_authors = authors.collect { |author| author.books }.flatten
+      @books = (books + books_from_authors).uniq.sort_by(&:title)
     else
+      @header = "All Books"
       @books = Book.order(title: :asc)
     end
   end
@@ -18,11 +23,14 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
+    @book.build_author
   end
 
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
+    author = Author.find_or_create_by(book_params[:author_attributes])
+    @book.author_id = author.id
 
     if @book.save
       redirect_to @book, notice: 'Book was submitted successfully'
@@ -38,6 +46,8 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     @book.update_attributes(book_params)
+    author = Author.find_or_create_by(book_params[:author_attributes])
+    @book.author_id = author.id
 
     if @book.save
       redirect_to @book, notice: 'This book was successfully updated'
@@ -56,13 +66,8 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(
-      :title,
-      :author,
-      :year,
-      :genre,
-      :synopsis,
-      :image,
-      :remove_image
+      :title, :year, :genre, :synopsis, :image, :remove_image,
+      author_attributes: [:first_name, :middle_name, :last_name, :suffix]
     )
   end
 end

@@ -1,4 +1,4 @@
-<h2>All Books</h2>
+<h2><%= @header %></h2>
 
 <% if @books.blank? && params[:search] %>
   <h4>There are no books containing "<%= params[:search] %>"</h4>
@@ -9,7 +9,7 @@
 <% end %>
 
 <ul>
-  <%= @books.each do |book| %>
+  <% @books.each do |book| %>
     <li><%= link_to book.title, book_path(book) %></li>
   <% end %>
 </ul>

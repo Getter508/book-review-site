@@ -21,6 +21,18 @@ feature 'user tries to search' do
     expect(page).to have_content('The Name of the Wind')
   end
 
+  scenario 'user successfully searches for books by an author' do
+    book1 = FactoryBot.create(:book, title: "The Wise Man's Fear")
+    book2 = FactoryBot.create(:book)
+
+    visit books_path
+    fill_in 'search', with: 'Patrick Rothfuss'
+    click_on 'Search'
+
+    expect(page).to have_content('The Name of the Wind', count: 1)
+    expect(page).to have_content("The Wise Man's Fear", count: 1)
+  end
+
   scenario 'user cannot find a book' do
     book = FactoryBot.create(:book)
 

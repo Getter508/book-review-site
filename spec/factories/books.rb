@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :book do
     title {"The Name of the Wind"}
-    author {"Patrick Rothfuss"}
     year {2007}
     genre {"Fantasy"}
     synopsis {"So begins the tale of Kvothe—from his childhood in a troupe of \
@@ -14,5 +13,6 @@ FactoryBot.define do
     # image { Rack::Test::UploadedFile.new(Rails.root.join('spec/support/NameofWindCover.jpg'), 'image/jpeg') }
 
     user
+    author
   end
 end
