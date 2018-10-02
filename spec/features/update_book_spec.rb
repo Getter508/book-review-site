@@ -49,7 +49,8 @@ feature 'user tries to update a book' do
 
     expect(page).to have_content('Use the form below to update this book')
     expect(find_field('Title').value).to eq('The Name of the Wind')
-    expect(find_field('Author').value).to eq('Patrick Rothfuss')
+    expect(find_field('First name').value).to eq('Patrick')
+    expect(find_field('Last name').value).to eq('Rothfuss')
     expect(find_field('Publication year').value).to eq('2007')
     expect(find_field('Genre').value).to eq('Fantasy')
     expect(find_field('Synopsis').value).to have_content('Kvothe')

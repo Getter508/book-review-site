@@ -12,10 +12,13 @@ class Book < ApplicationRecord
   GENRES = ["Drama", "Mystery", "Romance", "Fantasy", "SciFi", "Non-Fiction"]
 
   belongs_to :user
+  belongs_to :author
+  accepts_nested_attributes_for :author
   has_many :reviews, dependent: :destroy
 
-  validates_presence_of :title, :author, :user_id
+  validates_presence_of :title, :author_id, :user_id
   validates :user_id, numericality: { only_integer: true }
+  validates :author_id, numericality: { only_integer: true }
   validates :genre, inclusion: { in: GENRES }
   validates :synopsis, length: { maximum: 1000 }
   validates :year, length: { is: 4 }, numericality: { only_integer: true },
@@ -34,6 +37,6 @@ class Book < ApplicationRecord
   end
 
   def self.search(search)
-    where("title ILIKE ? OR author ILIKE ? OR synopsis ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%") 
+    Book.where("books.title ILIKE ? OR books.synopsis ILIKE ?", "%#{search}%", "%#{search}%")
   end
 end

@@ -17,10 +17,28 @@
       <%= f.text_field :title, value: @book.title %>
     </div>
 
-    <div class="field">
-      <%= f.label :author %><br />
-      <%= f.text_field :author, value: @book.author %>
-    </div>
+    Author
+    <%= f.fields_for :author do |author_form| %>
+      <div class="field">
+        <%= author_form.label :first_name %><br />
+        <%= author_form.text_field :first_name, value: @book.author.first_name %>
+      </div>
+
+      <div class="field">
+        <%= author_form.label :middle_name %><br />
+        <%= author_form.text_field :middle_name, value: @book.author.middle_name %>
+      </div>
+
+      <div class="field">
+        <%= author_form.label :last_name %><br />
+        <%= author_form.text_field :last_name, value: @book.author.last_name %>
+      </div>
+
+      <div class="field">
+        <%= author_form.label :suffix %><br />
+        <%= author_form.text_field :suffix, value: @book.author.suffix %>
+      </div>
+    <% end %>
 
     <div class="field">
       <%= f.label :year, 'Publication year' %><br />

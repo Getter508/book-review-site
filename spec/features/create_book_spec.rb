@@ -21,7 +21,8 @@ feature 'user tries to create a book' do
 
     visit new_book_path
     fill_in 'Title', with: 'The Name of the Wind'
-    fill_in 'Author', with: 'Patrick Rothfuss'
+    fill_in 'First name', with: 'Patrick'
+    fill_in 'Last name', with: 'Rothfuss'
     select 'Fantasy', from: 'Genre'
     attach_file('book[image]', Rails.root.join('spec', 'support', 'NameofWindCover.jpg'))
     click_button 'Submit'
