@@ -23,7 +23,7 @@ class ReviewsController < ApplicationController
   def update
     @book = Book.find(params[:book_id])
     @review = Review.find(params[:id])
-    @review.update_attributes(review_params)
+    @review.assign_attributes(review_params)
 
     if @review.save
       redirect_to book_path(@book), notice: 'Your review was successfully updated'

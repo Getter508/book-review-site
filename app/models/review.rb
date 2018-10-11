@@ -10,4 +10,12 @@ class Review < ApplicationRecord
     less_than_or_equal_to: 10 }
   validates :user_id, numericality: { only_integer: true }
   validates :book_id, numericality: { only_integer: true }
+
+  def net_upvotes
+    net = 0
+    votes.each do |vote|
+      net = vote.upvote ? net + 1 : net - 1
+    end
+    return net
+  end
 end

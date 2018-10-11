@@ -1,0 +1,7 @@
+<div class="vote_form">
+  <%= form_for [@review, @vote] do |f| %>
+    <div class="vote">
+      <%= f.submit "Vote" :vote %>
+    </div>
+  <% end %>
+</div>
