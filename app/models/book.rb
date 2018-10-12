@@ -28,13 +28,13 @@ class Book < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
+  def self.search(search)
+    Book.where("books.title ILIKE ? OR books.synopsis ILIKE ?", "%#{search}%", "%#{search}%")
+  end
+
   private
 
   def image_size_validation
     errors[:image] << "should be less than 500KB" if image.size > 0.5.megabytes
-  end
-
-  def self.search(search)
-    Book.where("books.title ILIKE ? OR books.synopsis ILIKE ?", "%#{search}%", "%#{search}%")
   end
 end
