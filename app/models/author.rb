@@ -4,12 +4,8 @@ class Author < ApplicationRecord
   validates_presence_of :first_name, :last_name
 
   def full_name
-    "#{first_name} #{middle_name} #{last_name} #{suffix}"
+    "#{first_name} #{middle_name} #{last_name} #{suffix}".split.join(' ')
   end
-
-  # def middle_initial
-  #   middle_name.first
-  # end
 
   def self.search(search)
     Author.where("concat(first_name, ' ', last_name) ILIKE ?
