@@ -18,4 +18,21 @@ class Review < ApplicationRecord
     end
     return net
   end
+
+  def time_diff
+    Time.zone.now - created_at #in seconds
+  end
+
+  def display_time
+    if time_diff < 60 #1 min
+      time = "less than 1m ago"
+    elsif time_diff < 3600 #1 hr
+      time = "#{(time_diff / 60).round}m ago"
+    elsif time_diff < 86400 #1 day
+      time = "#{(time_diff / 3600).round}h ago"
+    else
+      time = "#{(time_diff / 86400).round}d ago"
+    end
+    return time
+  end
 end

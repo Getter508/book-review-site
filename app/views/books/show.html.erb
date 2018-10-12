@@ -63,7 +63,7 @@
           <h3><%= review.rating %> out of 10</h3>
           <h4><%= review.title %></h4>
           <p><%= review.body %></p>
-          <p>Posted review at <%= review.created_at %></p>
+          <p>Posted <%= review.display_time %></p>
 
           <% if current_user&.id == @book.user_id || current_user&.admin? %>
             <%= link_to 'Edit', edit_book_review_path(@book, review) %>

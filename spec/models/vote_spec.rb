@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Vote, type: :model do
-  scenario "vote has an upvote" do
+  scenario "has an upvote" do
     vote = FactoryBot.create(:vote)
 
-    expect(vote.upvote.to_s).to eq('true')
+    expect(vote.upvote).to be true
   end
 end

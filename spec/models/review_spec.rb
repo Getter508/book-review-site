@@ -29,3 +29,41 @@ describe '#net_upvotes' do
     end
   end
 end
+
+describe '#time_diff' do
+  context 'calculates how long ago a review was created' do
+    it 'calculates the time difference' do
+      review = FactoryBot.create(:review, created_at: Time.zone.now - 30)
+
+      expect(review.time_diff).to be_within(0.2).of(30)
+    end
+  end
+end
+
+describe '#display_time' do
+  context 'displays how long ago a review was created' do
+    it 'shows less than a minute' do
+      review = FactoryBot.create(:review, created_at: Time.zone.now - 30)
+
+      expect(review.display_time).to eq('less than 1m ago')
+    end
+
+    it 'shows how many minutes' do
+      review = FactoryBot.create(:review, created_at: Time.zone.now - 600)
+
+      expect(review.display_time).to eq('10m ago')
+    end
+
+    it 'shows how many hours' do
+      review = FactoryBot.create(:review, created_at: Time.zone.now - 4000)
+
+      expect(review.display_time).to eq('1h ago')
+    end
+
+    it 'shows how many days' do
+      review = FactoryBot.create(:review, created_at: Time.zone.now - 87000)
+
+      expect(review.display_time).to eq('1d ago')
+    end
+  end
+end
