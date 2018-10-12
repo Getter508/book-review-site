@@ -19,6 +19,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @reviews = @book.reviews.order(created_at: :desc)
     @review = Review.new
+    @vote = Vote.new
   end
 
   def new
@@ -45,7 +46,7 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    @book.update_attributes(book_params)
+    @book.assign_attributes(book_params)
     author = Author.find_or_create_by(book_params[:author_attributes])
     @book.author_id = author.id
 

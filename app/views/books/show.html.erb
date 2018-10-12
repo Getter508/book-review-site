@@ -33,12 +33,37 @@
     <% @reviews.each do |review| %>
       <div class="review">
         <li>
+          <div class="votes">
+            <div class="upvote_form">
+              <%= form_for [review, @vote] do |f| %>
+                <div class="vote">
+                  <%= f.hidden_field :upvote, value: true %>
+                  <%= f.submit "Upvote" %>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="net_votes">
+              <%= review.net_upvotes %>
+            </div>
+
+            <div class="downvote_form">
+              <%= form_for [review, @vote] do |f| %>
+                <div class="vote">
+                  <%= f.hidden_field :upvote, value: false %>
+                  <%= f.submit "Downvote" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
           <%= image_tag review.user.avatar.thumb.url if review.user.avatar.file %>
           <p><%= review.user.username %></p>
+
           <h3><%= review.rating %> out of 10</h3>
           <h4><%= review.title %></h4>
           <p><%= review.body %></p>
-          <p>Posted review at <%= review.created_at %></p>
+          <p>Posted <%= review.display_time %></p>
 
           <% if current_user&.id == @book.user_id || current_user&.admin? %>
             <%= link_to 'Edit', edit_book_review_path(@book, review) %>

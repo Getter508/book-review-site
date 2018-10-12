@@ -9,3 +9,11 @@ RSpec.describe User, type: :model do
     expect(user.admin).to be_truthy
   end
 end
+
+describe '#display_name' do
+  scenario 'it displays last name, first name of a user' do
+    user = FactoryBot.create(:user)
+
+    expect(user.display_name).to eq('Getter, Sarah')
+  end
+end
