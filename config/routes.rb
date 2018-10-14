@@ -20,4 +20,10 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, only: [:index, :destroy]
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :votes, only: [:create]
+    end
+  end
 end

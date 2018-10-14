@@ -36,23 +36,21 @@
           <div class="votes">
             <div class="upvote_form">
               <%= form_for [review, @vote] do |f| %>
-                <div class="vote">
-                  <%= f.hidden_field :upvote, value: true %>
-                  <%= f.submit "Upvote" %>
-                </div>
+                <%= f.hidden_field :review_id, value: review.id %>
+                <%= f.hidden_field :upvote, value: true %>
+                <%= f.submit "Upvote" %>
               <% end %>
             </div>
 
-            <div class="net_votes">
+            <div class="net_votes_<%= review.id %>">
               <%= review.net_upvotes %>
             </div>
 
             <div class="downvote_form">
               <%= form_for [review, @vote] do |f| %>
-                <div class="vote">
-                  <%= f.hidden_field :upvote, value: false %>
-                  <%= f.submit "Downvote" %>
-                </div>
+                <%= f.hidden_field :review_id, value: review.id %>
+                <%= f.hidden_field :upvote, value: false %>
+                <%= f.submit "Downvote" %>
               <% end %>
             </div>
           </div>

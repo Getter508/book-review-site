@@ -18,7 +18,7 @@ feature 'user tries to delete vote' do
     click_on 'Upvote'
     click_on 'Upvote'
 
-    expect(find('.net_votes')).to have_content(0)
+    expect(find(".net_votes_#{review.id}")).to have_content(0)
   end
 
   scenario 'user deletes downvote' do
@@ -34,6 +34,6 @@ feature 'user tries to delete vote' do
     click_on 'Downvote'
     click_on 'Downvote'
 
-    expect(find('.net_votes')).to have_content(0)
+    expect(find(".net_votes_#{review.id}")).to have_content(0)
   end
 end
