@@ -18,7 +18,7 @@ feature 'user tries to update vote' do
     click_on 'Upvote'
     click_on 'Downvote'
 
-    expect(find('.net_votes')).to have_content(-1)
+    expect(find(".net_votes_#{review.id}")).to have_content(-1)
   end
 
   scenario 'user updates downvote to upvote' do
@@ -34,6 +34,6 @@ feature 'user tries to update vote' do
     click_on 'Downvote'
     click_on 'Upvote'
 
-    expect(find('.net_votes')).to have_content(1)
+    expect(find(".net_votes_#{review.id}")).to have_content(1)
   end
 end
