@@ -19,7 +19,7 @@
 
   <ul class="book-list no-bullet">
     <% @books.each do |book| %>
-      <li><%= link_to book.title, book_path(book) %></li>
+      <li class="h5"><%= link_to book.title, book_path(book) %></li>
     <% end %>
   </ul>
 </div>
