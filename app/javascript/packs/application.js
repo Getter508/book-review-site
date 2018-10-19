@@ -25,8 +25,32 @@ $(document).ready(function(){
       $(net_votes_div).text(response.updated_net_votes);
     });
 
-    request.always(() => {
+    request.always((response) => {
       $(active_element).removeAttr("disabled");
+
+      let vote_new = $(active_element).prev().val();
+      let other_down = $(`#${response.review_id}.down`);
+      let other_up = $(`#${response.review_id}.up`);
+
+      if (vote_new === "true") {
+        other_element = other_down;
+      } else {
+        other_element = other_up;
+      }
+
+
+      if (response.previous_vote === null) {
+        $(active_element).addClass("warning");
+      } else if (String(response.previous_vote) === vote_new) {
+        $(active_element).removeClass("warning");
+      } else {
+        $(active_element).addClass("warning");
+        $(other_element).removeClass("warning");
+      }
     });
   });
 });
+
+// $('#fixed_callout_container').scroll(function() {
+//     $('#fixed_callout').css('top', $(this).scrollTop());
+// });

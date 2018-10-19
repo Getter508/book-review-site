@@ -14,9 +14,8 @@ class Book < ApplicationRecord
   accepts_nested_attributes_for :author
   has_many :reviews, dependent: :destroy
 
-  validates_presence_of :title, :author_id, :user_id
+  validates_presence_of :title, :author, :user_id
   validates :user_id, numericality: { only_integer: true }
-  validates :author_id, numericality: { only_integer: true }
   validates :genre, inclusion: { in: GENRES }
   validates :synopsis, length: { maximum: 1000 }
   validates :year, length: { is: 4 }, numericality: { only_integer: true },

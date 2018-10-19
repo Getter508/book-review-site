@@ -1,15 +1,25 @@
-<h2><%= @header %></h2>
+<div class="index">
+  <div class="flex-container align-justify">
+    <div class="index-title">
+      <h1 class="h2"><%= @header %></h1>
+    </div>
 
-<% if @books.blank? && params[:search] %>
-  <h4>There are no books containing "<%= params[:search] %>"</h4>
-<% end %>
+    <div class="index-submit">
+      <% if user_signed_in? %>
+        <%= link_to 'Submit a Book', new_book_path %>
+      <% end %>
+    </div>
+  </div>
 
-<% if user_signed_in? %>
-  <p><%= link_to 'Submit a Book', new_book_path %></p>
-<% end %>
+  <div class="search-alert">
+    <% if @books.blank? && params[:search] %>
+      <h1 class="h4">There are no books containing "<%= params[:search] %>"</h1>
+    <% end %>
+  </div>
 
-<ul>
-  <% @books.each do |book| %>
-    <li><%= link_to book.title, book_path(book) %></li>
-  <% end %>
-</ul>
+  <ul class="book-list no-bullet">
+    <% @books.each do |book| %>
+      <li><%= link_to book.title, book_path(book) %></li>
+    <% end %>
+  </ul>
+</div>

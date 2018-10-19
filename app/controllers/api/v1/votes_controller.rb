@@ -6,6 +6,7 @@ class Api::V1::VotesController < ApplicationController
     if Vote.update_or_destroy(current_user, review, vote_params[:upvote])
       render json: {
         updated_net_votes: review.net_upvotes,
+        previous_vote: previous_vote&.upvote,
         review_id: review.id,
         status: :created
       }

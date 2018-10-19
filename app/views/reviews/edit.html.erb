@@ -1,4 +1,16 @@
-<h2>Edit Review for: <%= @book.title %></h2>
-<p>Use the form below to edit your review of this book.</p>
+<div class="grid-y grid-frame">
+  <div class="cell cell-block-container">
+    <div class="grid-x grid-margin-x">
+      <div class="large-6 medium-6 cell cell-block-y">
+        <%= render 'books/details' %>
+      </div>
 
-<%= render 'reviews/form' %>
+      <div class="large-6 medium-6 cell">
+        <h1 class="h2">Edit Your Review</h1>
+        <p>Use the form below to edit your review of this book</p>
+
+        <%= render 'reviews/form' %>
+      </div>
+    </div>
+  </div>
+</div>

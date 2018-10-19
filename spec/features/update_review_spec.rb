@@ -45,11 +45,11 @@ feature 'user tries to update a review' do
 
     visit books_path
     click_on 'The Name of the Wind'
-    within(".reviews") do
+    within(".view_reviews") do
       click_on('Edit')
     end
 
-    expect(page).to have_content('Edit Review for: The Name of the Wind')
+    expect(page).to have_content('Edit Your Review')
     expect(find_field('Rating').value).to eq('10')
     expect(find_field('Title').value).to eq('Best Book Ever!')
     expect(find_field('Body').value).to have_content('Patrick Rothfuss')
@@ -65,7 +65,7 @@ feature 'user tries to update a review' do
 
     visit books_path
     click_on 'The Name of the Wind'
-    within(".reviews") do
+    within(".view_reviews") do
       click_on('Edit')
     end
     select '9', from: 'Rating'
@@ -73,7 +73,7 @@ feature 'user tries to update a review' do
 
     expect(page).to have_content('Your review was successfully updated')
     expect(page).to have_content('9 out of 10')
-    expect(page).not_to have_content('Edit Review for')
+    expect(page).not_to have_content('Edit Your Review')
   end
 
   scenario 'author provides invalid info' do
@@ -86,7 +86,7 @@ feature 'user tries to update a review' do
 
     visit books_path
     click_on 'The Name of the Wind'
-    within(".reviews") do
+    within(".view_reviews") do
       click_on('Edit')
     end
 
@@ -95,7 +95,7 @@ feature 'user tries to update a review' do
 
     expect(page).to have_content('is not a number')
     expect(page).to have_content("can't be blank")
-    expect(page).to have_content('Edit Review for')
+    expect(page).to have_content('Edit Your Review')
     expect(page).not_to have_content('out of 10')
   end
 end

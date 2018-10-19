@@ -1,44 +1,42 @@
-<div class="book_details">
-  <h2><%= @book.title %></h2>
+<div class="grid-container">
+  <div class="grid-x">
+    <div class="book_details large-6 cell">
+      <%= render 'books/details' %>
 
-  <%= image_tag @book.image.cover.url  if @book.image.file %>
+      <div class="large button-group">
+        <% if current_user&.id == @book.user_id || current_user&.admin? %>
+          <%= link_to 'Edit', edit_book_path(@book), class: 'clear button' %>
+          <%= link_to 'Delete', book_path(@book), method: :delete, class: 'clear button' %>
+        <% end %>
+      </div>
+    </div>
 
-  <h4>Author: <%= @book.author.full_name %></h4>
-  <h4>Publication Year: <%= @book.year %></h4>
-  <h4>Genre: <%= @book.genre %></h4>
-  <h4>Synopsis: <%= @book.synopsis %></h4>
-
-  <ul>
-    <% if current_user&.id == @book.user_id || current_user&.admin? %>
-      <li><%= link_to 'Edit', edit_book_path(@book) %></li>
-      <li><%= link_to 'Delete', book_path(@book), method: :delete %></li>
-    <% end %>
-  </ul>
+    <div class="post_review large-6 cell">
+      <% if user_signed_in? %>
+        <div class="post_review callout">
+          <h1 class="h3">Post a Review</h1>
+          <p>Use the form below to submit a review of this book</p>
+          <%= render 'reviews/form' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
 
-<% if user_signed_in? %>
-  <div class="post_review">
-    <h2>Post a Review</h2>
-    <p>Use the form below to submit a review of this book.</p>
+<hr>
 
-    <%= render 'reviews/form' %>
-
-  </div>
-<% end %>
-
-
-<div class="reviews">
-  <h2>Reviews</h2>
-  <ul>
+<div class="view_reviews grid-container">
+  <h1 class="h2">Reviews</h1>
+  <ul class="no-bullet">
     <% @reviews.each do |review| %>
-      <div class="review">
-        <li>
-          <div class="votes">
+      <li class="review grid-container">
+        <div class="grid-x text-center">
+          <div class="votes large-1 medium-2 cell">
             <div class="upvote_form">
               <%= form_for [review, @vote] do |f| %>
                 <%= f.hidden_field :review_id, value: review.id %>
                 <%= f.hidden_field :upvote, value: true %>
-                <%= f.submit "Upvote" %>
+                <%= f.submit "Upvote", class: "#{review.user_vote(current_user).set_div_class(current_user, true)}", id: "#{review.id}" %>
               <% end %>
             </div>
 
@@ -50,25 +48,34 @@
               <%= form_for [review, @vote] do |f| %>
                 <%= f.hidden_field :review_id, value: review.id %>
                 <%= f.hidden_field :upvote, value: false %>
-                <%= f.submit "Downvote" %>
+                <%= f.submit "Downvote", class: "#{review.user_vote(current_user).set_div_class(current_user, false)}", id: "#{review.id}" %>
               <% end %>
             </div>
           </div>
 
-          <%= image_tag review.user.avatar.thumb.url if review.user.avatar.file %>
-          <p><%= review.user.username %></p>
+          <div class="callout secondary large-8 medium-8 cell grid-container">
+            <div class="grid-x">
+              <div class="user_info large-2 medium-2 cell">
+                <%= image_tag review.user.avatar.thumb.url if review.user.avatar.file %>
+                <p><%= review.user.username %></p>
+              </div>
 
-          <h3><%= review.rating %> out of 10</h3>
-          <h4><%= review.title %></h4>
-          <p><%= review.body %></p>
-          <p>Posted <%= review.display_time %></p>
-
-          <% if current_user&.id == @book.user_id || current_user&.admin? %>
-            <%= link_to 'Edit', edit_book_review_path(@book, review) %>
-            <%= link_to 'Delete', book_review_path(@book, review), method: :delete %>
-          <% end %>
-        </li>
-      </div>
+              <div class="review_info large-10 medium-10 cell text-left">
+                <h2 class="h4"><%= review.rating %> out of 10</h2>
+                <h2 class="h4"><%= review.title %></h2>
+                <p><%= review.body %></p>
+                <p><small>Posted <%= review.display_time %></small></p>
+                <div class="button-group align-right">
+                  <% if current_user&.id == @book.user_id || current_user&.admin? %>
+                    <%= link_to 'Edit', edit_book_review_path(@book, review), class: 'clear button' %>
+                    <%= link_to 'Delete', book_review_path(@book, review), method: :delete, class: 'clear button' %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
     <% end %>
   </ul>
 </div>
