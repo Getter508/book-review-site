@@ -17,12 +17,14 @@ feature 'user tries to update a review' do
     visit books_path
     click_on 'The Name of the Wind'
 
-    expect(page).not_to have_content('Edit')
+    within(".review_info") do
+      expect(page).not_to have_content('Edit')
+    end
   end
 
   scenario 'not the author of the review' do
     user = FactoryBot.create(:user, admin: false)
-    book = FactoryBot.create(:book)
+    review = FactoryBot.create(:review)
 
     visit new_user_session_path
     fill_in 'Email', with: user.email
@@ -32,7 +34,9 @@ feature 'user tries to update a review' do
     visit books_path
     click_on 'The Name of the Wind'
 
-    expect(page).not_to have_content('Edit')
+    within(".review_info") do
+      expect(page).not_to have_content('Edit')
+    end
   end
 
   scenario 'author navigates to edit page' do
