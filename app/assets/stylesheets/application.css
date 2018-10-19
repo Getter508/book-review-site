@@ -52,8 +52,9 @@ dt {
   padding-left: 50px;
   padding-right: 50px;
 }
+
 .index-submit {
-  margin-top: 16px;
+  margin-top: 15px;
 }
 
 .post_review {
@@ -94,5 +95,14 @@ dt {
 
   .container {
     margin: 0;
+  }
+
+  .index {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .index-submit {
+    margin-top: 0px;
   }
 }
