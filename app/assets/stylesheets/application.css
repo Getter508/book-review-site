@@ -36,6 +36,7 @@ dt {
   background-color: #FFFFFF;
   padding: 0px 15px;
   margin: 0px 67.5px;
+  min-height: 650px;
 }
 
 .down {
@@ -47,6 +48,10 @@ dt {
   padding-left: 20px;
 }
 
+.index {
+  padding-left: 50px;
+  padding-right: 50px;
+}
 .index-submit {
   margin-top: 16px;
 }
