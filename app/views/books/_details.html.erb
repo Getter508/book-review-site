@@ -1,0 +1,14 @@
+<h1 class="h2"><%= @book.title %></h1>
+
+<%= image_tag @book.image.cover.url  if @book.image.file %>
+
+<dl>
+  <dt>Author</dt>
+  <dd><%= @book.author.full_name %></dd>
+  <dt>Publication Year</dt>
+  <dd><%= @book.year %></dd>
+  <dt>Genre</dt>
+  <dd><%= @book.genre %></dd>
+  <dt>Synopsis</dt>
+  <dd><%= @book.synopsis %></dd>
+</dl>

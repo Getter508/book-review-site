@@ -10,12 +10,13 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'foundation-rails'
 gem 'devise'
 gem 'webpacker'
 gem 'carrierwave'
 gem 'fog-aws'
 gem 'mini_magick'
+gem 'foundation-rails'
+gem 'autoprefixer-rails'
 
 group :development, :test do
   gem 'dotenv-rails'

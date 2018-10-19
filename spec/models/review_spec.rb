@@ -67,3 +67,25 @@ describe '#display_time' do
     end
   end
 end
+
+describe '#user_vote' do
+  context 'finds the users vote for a review or creates a new vote' do
+    it 'finds the users vote' do
+      user = FactoryBot.create(:user)
+      review = FactoryBot.create(:review)
+      vote1 = FactoryBot.create(:vote, review: review)
+      vote2 = FactoryBot.create(:vote, review: review)
+      vote3 = FactoryBot.create(:vote, review: review, user: user)
+
+      expect(review.user_vote(user)).to be_a Vote
+      expect(review.user_vote(user).user).to eq(user)
+    end
+
+    it 'creates a new vote' do
+      review = FactoryBot.create(:review)
+      vote = FactoryBot.create(:vote)
+
+      expect(review.user_vote(review.user)).not_to eq(vote)
+    end
+  end
+end

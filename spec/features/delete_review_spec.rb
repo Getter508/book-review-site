@@ -47,7 +47,7 @@ feature 'user tries to delete a review' do
     visit books_path
     click_on 'The Name of the Wind'
 
-    within(".reviews") do
+    within(".view_reviews") do
       click_on 'Delete'
     end
 

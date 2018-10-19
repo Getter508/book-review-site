@@ -1,10 +1,9 @@
 <div class="review_form">
   <%= form_for [@book, @review] do |f| %>
     <% if @review.errors.any? %>
-      <div class="error_explanation">
-        <h3><%= pluralize(@review.errors.count, "error") %> prohibited this submission:</h3>
-
-        <ul>
+      <div class="error_explanation callout alert">
+        <h2 class="h3"><%= pluralize(@review.errors.count, "error") %> prohibited this submission:</h2>
+        <ul class="error-list">
         <% @review.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
@@ -12,24 +11,40 @@
       </div>
     <% end %>
 
-    <div class="field">
-      <%= f.label :rating %><br />
-      <%= f.select(:rating, (1..10).to_a, { include_blank: 'Select Rating'}) %>
-      <p>(10 is the best)</p>
+    <div class="grid-container">
+      <div class="grid-x">
+        <div class="large-4 cell">
+          <%= f.label :rating %>
+          <%= f.select(:rating, (1..10).to_a, { include_blank: 'Select Rating'}) %>
+          <p><small>(10 is the best)</small></p>
+        </div>
+      </div>
     </div>
 
-    <div class="field">
-      <%= f.label :title %><br />
-      <%= f.text_field :title, value: @review.title %>
+    <div class="grid-container">
+      <div class="grid-x grid-margin-x">
+        <div class="large-12 cell">
+          <%= f.label :title %>
+          <%= f.text_field :title, value: @review.title %>
+        </div>
+      </div>
     </div>
 
-    <div class="field">
-      <%= f.label :body %><br />
-      <%= f.text_area :body, value: @review.body %>
+    <div class="grid-container">
+      <div class="grid-x grid-margin-x">
+        <div class="large-12 cell">
+          <%= f.label :body %>
+          <%= f.text_area :body, value: @review.body, size: "12x6" %>
+        </div>
+      </div>
     </div>
 
-    <div class="actions">
-      <%= f.submit "Submit" %>
+    <div class="grid-container">
+      <div class="grid-x grid-margin-x">
+        <div class="actions cell">
+          <%= f.submit "Submit", class: "button float-right" %>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>

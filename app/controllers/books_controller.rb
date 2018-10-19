@@ -36,6 +36,7 @@ class BooksController < ApplicationController
     if @book.save
       redirect_to @book, notice: 'Book was submitted successfully'
     else
+      @reviews = @book.reviews.order(created_at: :desc)
       render 'new'
     end
   end

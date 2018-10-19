@@ -10,6 +10,8 @@ class Review < ApplicationRecord
     less_than_or_equal_to: 10 }
   validates :user_id, numericality: { only_integer: true }
   validates :book_id, numericality: { only_integer: true }
+  validates_uniqueness_of :book, scope: :user,
+    message: "can be reviewed only once by each user"
 
   def net_upvotes
     net = 0
@@ -34,5 +36,9 @@ class Review < ApplicationRecord
       time = "#{(time_diff / 86400).round}d ago"
     end
     return time
+  end
+
+  def user_vote(current_user)
+    votes.find_by(user: current_user) || Vote.new
   end
 end

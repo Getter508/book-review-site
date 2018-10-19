@@ -12,4 +12,82 @@
  *
  *= require_tree .
  *= require_self
+ *= require foundation_and_overrides
+
  */
+
+body {
+  background-color: #333333;
+}
+
+dt {
+  margin-top: 12px;
+}
+
+.book_details {
+  padding-right: 15px;
+}
+
+.callout.secondary {
+  margin-left: 15px;
+}
+
+.container {
+  background-color: #FFFFFF;
+  padding: 0px 15px;
+  margin: 0px 67.5px;
+}
+
+.down {
+  margin-top: 8px;
+}
+
+.error_explanation {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.index-submit {
+  margin-top: 16px;
+}
+
+.post_review {
+  margin: 0;
+  background: gray;
+}
+
+.review_info {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.up {
+  margin-bottom: 8px;
+}
+
+.view_reviews {
+  margin-top: 16px;
+}
+
+.view_reviews ul {
+  margin-bottom: 0;
+  margin-top: 16px;
+}
+
+#review_rating {
+  margin-bottom: 4px;
+}
+
+#search-submit {
+  margin-bottom: 15px;
+}
+
+@media screen and (max-width: 39.9375em) {
+  .callout.secondary {
+    margin-left: 0;
+  }
+
+  .container {
+    margin: 0;
+  }
+}

@@ -6,8 +6,7 @@ class Vote < ApplicationRecord
   validates_inclusion_of :upvote, in: [true, false]
   validates :user_id, numericality: { only_integer: true }
   validates :review_id, numericality: { only_integer: true }
-  validates :user_id, uniqueness: { scope: :review_id,
-    message: "Each user can vote on a review only once" }
+  validates_uniqueness_of :user, scope: :review
 
   def self.update_or_destroy(user, review, upvote)
     previous_vote = Vote.find_by(review: review, user: user)
@@ -17,6 +16,15 @@ class Vote < ApplicationRecord
       previous_vote.destroy
     else
       previous_vote.update_attributes(upvote: upvote)
+    end
+  end
+
+  def set_div_class(current_user, value)
+    klass = value ? 'up' : 'down'
+    if current_user == user && upvote == value
+      return "#{klass} callout small warning"
+    else
+      return "#{klass} callout small"
     end
   end
 end

@@ -11,6 +11,7 @@ class ReviewsController < ApplicationController
       redirect_to book_path(@book), notice: 'Your review was posted successfully'
     else
       @reviews = @book.reviews.order(created_at: :desc)
+      @vote = Vote.new
       render "books/show"
     end
   end
