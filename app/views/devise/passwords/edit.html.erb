@@ -17,9 +17,11 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-  <div class="actions">
+  <div class="actions spaced">
     <%= f.submit "Change my password" %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<div class="devise links">
+  <%= render "devise/shared/links" %>
+</div>
