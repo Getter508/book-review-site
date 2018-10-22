@@ -24,6 +24,10 @@ dt {
   margin-top: 12px;
 }
 
+.actions.spaced {
+  margin-bottom: 15px;
+}
+
 .book_details {
   padding-right: 15px;
 }
@@ -37,6 +41,10 @@ dt {
   padding: 0px 15px;
   margin: 0px 67.5px;
   min-height: 650px;
+}
+
+.devise.links {
+  padding-bottom: 25px;
 }
 
 .down {
