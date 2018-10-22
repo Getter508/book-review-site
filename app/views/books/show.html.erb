@@ -27,6 +27,11 @@
 
 <div class="view_reviews grid-container">
   <h1 class="h2">Reviews</h1>
+
+  <% if @reviews.empty? %>
+    <h2 class="h4 none">None</h2>
+  <% end %>
+
   <ul class="no-bullet">
     <% @reviews.each do |review| %>
       <li class="review grid-container">
